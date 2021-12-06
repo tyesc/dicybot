@@ -1,0 +1,12 @@
+{
+  "name": "dicybot",
+  "version": "1.0.0",
+  "description": "another bot to roll a dice",
+  "main": "index.js",
+  "repository": "git@github.com:tyesc/dicybot.git",
+  "author": "tyesc <escolano.tyler@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^13.3.1"
+  }
+}
