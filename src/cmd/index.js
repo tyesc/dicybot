@@ -6,17 +6,20 @@ const { Routes } = require('discord-api-types/v9');
 
 const { TOKEN } = require('../services/env');
 
-module.exports = async ({ clientId, guildIds, client }) => {
+module.exports = async ({ clientId, guildIds }) => {
 	const body = [];
 	const commands = [];
 	const commandFiles = fs.readdirSync(resolve('./src/cmd'))
 		.filter(file => file.endsWith('.js') && !file.includes('index'));
 
 	for (const file of commandFiles) {
-		const command = require(`./${file}`);
+		const { slashCommand, prefixCommand } = require(`./${file}`);
 
-		body.push(command.data.toJSON());
-		commands.push({ name: command.data.name, exec: command.exec });
+		body.push(slashCommand.data.toJSON());
+		commands.push({
+			slashCommand,
+			prefixCommand,
+		});
 	}
 
 	const rest = new REST({ version: '9' }).setToken(TOKEN);

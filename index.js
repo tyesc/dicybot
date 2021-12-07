@@ -21,9 +21,10 @@ client.on('ready', async () => {
 
   client.on('interactionCreate', async i => {
     if (i.isCommand()) {
-      for (var cmd of commands) {
-        console.log('CMD', cmd);
-        if (i.commandName === cmd.name) {
+      for (var command of commands) {
+        const cmd = command.slashCommand;
+
+        if (i.commandName === cmd.data.name) {
           await cmd.exec(i);
         }
       }
@@ -34,17 +35,26 @@ client.on('ready', async () => {
         : await i.reply('You can\'t roll many dice');
     }
   });
+
+  client.on('messageCreate', async m => {
+    const content = m?.content?.split(' ');
+
+    if (content?.length) {
+      for (var command of commands) {
+        const cmd = command.prefixCommand;
+        const prefix = cmd.data.prefix;
+
+        if (content[0] === prefix) {
+          await cmd.exec(m, client);
+        }
+      }
+    }
+
+    // if (m.content === 'ping') {
+    //   await m.reply('Pong!');
+    // }
+  });
+
 });
-
-
-
-client.on('messageCreate', async interaction => {
-  // console.log('MESSAGE', interaction.isCommand());
-
-  if (interaction.content === 'ping') {
-    await interaction.reply('Pong!');
-  }
-});
-
 
 client.login(token);
