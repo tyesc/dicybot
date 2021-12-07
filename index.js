@@ -11,6 +11,7 @@ const client = new Client({
 
 const { token } = require('./config.json');
 const initCmd = require('./src/cmd');
+const random = require('./src/services/random');
 
 client.on('ready', async () => {
   console.log(`Logged in as ${client.user.tag}!`);
@@ -20,8 +21,11 @@ client.on('ready', async () => {
   const commands = await initCmd({ clientId, guildIds });
 
   client.on('interactionCreate', async i => {
+  	const channel = client.channels.cache.get(i.channelId);
+		const sender = `<@${i.user.id}>`;
+
     if (i.isCommand()) {
-      for (var command of commands) {
+      for (const command of commands) {
         const cmd = command.slashCommand;
 
         if (i.commandName === cmd.data.name) {
@@ -30,8 +34,12 @@ client.on('ready', async () => {
       }
     } else {
       // TODO: send a dice rolled
+
+      const val = i?.values[0];
       i?.values.length === 1
-        ? await i.reply('rolled')
+      ? await i.reply({
+            content: val,
+          })
         : await i.reply('You can\'t roll many dice');
     }
   });
@@ -40,7 +48,7 @@ client.on('ready', async () => {
     const content = m?.content?.split(' ');
 
     if (content?.length) {
-      for (var command of commands) {
+      for (const command of commands) {
         const cmd = command.prefixCommand;
         const prefix = cmd.data.prefix;
 
@@ -50,9 +58,6 @@ client.on('ready', async () => {
       }
     }
 
-    // if (m.content === 'ping') {
-    //   await m.reply('Pong!');
-    // }
   });
 
 });

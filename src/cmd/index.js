@@ -27,7 +27,7 @@ module.exports = async ({ clientId, guildIds }) => {
 	try {
 		console.log('Started refreshing application (/) commands.');
 
-		for (var guildId of guildIds) {
+		for (const guildId of guildIds) {
 			await rest.put(
 				Routes.applicationGuildCommands(clientId, guildId),
 				{ body },

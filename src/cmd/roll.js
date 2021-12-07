@@ -1,6 +1,7 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 
 const diceDropdown = require('../components/diceDropdown');
+const random = require('../services/random');
 
 const prefix = '!roll';
 
@@ -25,13 +26,15 @@ const prefixCommand = {
 
 	exec: async (m, client) => {
 		const channel = client.channels.cache.get(m.channelId);
-		const sender = `<@${m.author.id}>`;
+		const sender = `**${m.author.bot ? m.mentions.users[0] : m.author.username}**`;
 		// TODO: use random func or/and calculate if have +-/ etc...
     const [content, opts] = m?.content?.split(' ');
 		const [n, dice] = opts?.split('d').map(n => Number(n));
 
+		const r = random({ n, max: dice });
+
 		await channel.send({
-			content: `${sender} rolled ${n}d${dice}`,
+			content: `${sender} Roll: \`${r.details}\` Result: ${r.total}`,
 		});
 	},
 };
