@@ -8,10 +8,10 @@ const prefix = '!roll';
 const slashCommand = {
 	data: new SlashCommandBuilder()
 		.setName('roll')
-		.setDescription('Replies a dropdown to choose a dice to roll with button')
+		.setDescription('Affiche le sélecteur de dé')
 		.addIntegerOption((opts) =>
 			opts.setName('number')
-				.setDescription('How many dice')
+				.setDescription('Combien de dé ?')
 		),
 
 	exec: async i => {
@@ -19,7 +19,7 @@ const slashCommand = {
 
 		await i.reply({
 			ephemeral: true,
-			content: 'Choose a dice :',
+			content: '\u200B',
 			components: [diceDropdown(n)],
 		});
 	},
@@ -32,7 +32,7 @@ const prefixCommand = {
 
 	exec: async (m, client) => {
 		const channel = client.channels.cache.get(m.channelId);
-		const sender = `**${m.author.bot ? m.mentions.users[0] : m.author.username}**`;
+		const sender = `**${m.author.username}**`;
 		// TODO: use random func or/and calculate if have +-/ etc...
     const [content, opts] = m?.content?.split(' ');
 		const [n, dice] = opts?.split('d').map(n => Number(n));

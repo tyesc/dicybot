@@ -8,7 +8,7 @@ module.exports = n => {
     .addComponents(
       new MessageSelectMenu()
         .setCustomId('select_dice')
-        .setPlaceholder(translate('cmd.dropdown.dice.placeholder'))
+        .setPlaceholder('Sélectionner un dé')
         .addOptions(defaultDiceDropdown(n)),
     );
 }
