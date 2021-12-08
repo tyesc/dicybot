@@ -22,25 +22,32 @@ client.on('ready', async () => {
 
   client.on('interactionCreate', async i => {
   	const channel = client.channels.cache.get(i.channelId);
-		const sender = `<@${i.user.id}>`;
+		const sender = `**${i.user.username}**`;
 
     if (i.isCommand()) {
       for (const command of commands) {
         const cmd = command.slashCommand;
 
+        console.log(i);
+
         if (i.commandName === cmd.data.name) {
           await cmd.exec(i);
         }
       }
-    } else {
-      // TODO: send a dice rolled
+    }
 
+    if (i.isSelectMenu()) {
+      console.log(i);
       const val = i?.values[0];
-      i?.values.length === 1
-      ? await i.reply({
-            content: val,
-          })
-        : await i.reply('You can\'t roll many dice');
+
+      if (val) {
+        const [n, dice] = val?.split('d').map(n => Number(n));
+        const r = random({ n, max: dice });
+
+        await i.reply({
+          content: `${sender} Roll: \`${r.details}\` Result: ${r.total}`,
+        });
+      }
     }
   });
 
