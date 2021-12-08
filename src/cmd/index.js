@@ -3,6 +3,7 @@ const { resolve } = require('path');
 const { Collection } = require('discord.js');
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
+const colors = require('colors/safe');
 
 const { TOKEN } = require('../services/env');
 
@@ -25,7 +26,7 @@ module.exports = async ({ clientId, guildIds }) => {
 	const rest = new REST({ version: '9' }).setToken(TOKEN);
 
 	try {
-		console.log('Started refreshing application (/) commands.');
+		console.log(colors.yellow('Refreshing (/) commands ...'));
 
 		for (const guildId of guildIds) {
 			await rest.put(
@@ -34,7 +35,7 @@ module.exports = async ({ clientId, guildIds }) => {
 			);
 		}
 
-		console.log('Successfully reloaded application (/) commands.');
+		console.log(colors.green('Reloaded (/) commands Done!'));
 	} catch (error) {
 		console.error(error);
 	}

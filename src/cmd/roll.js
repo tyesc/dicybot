@@ -8,13 +8,19 @@ const prefix = '!roll';
 const slashCommand = {
 	data: new SlashCommandBuilder()
 		.setName('roll')
-		.setDescription('Replies a dropdown to choose a dice to roll with button'),
+		.setDescription('Replies a dropdown to choose a dice to roll with button')
+		.addIntegerOption((opts) =>
+			opts.setName('number')
+				.setDescription('How many dice')
+		),
 
 	exec: async i => {
+		const n = i.options?.getInteger('number') || 1;
+
 		await i.reply({
 			ephemeral: true,
 			content: 'Choose a dice :',
-			components: [diceDropdown],
+			components: [diceDropdown(n)],
 		});
 	},
 };

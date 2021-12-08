@@ -1,36 +1,36 @@
-const DEFAULT_DICE_DROPDOWN = [
+const defaultDiceDropdown = n => [
   {
-    label: '1D 100',
-    description: '!roll 1d100',
-    value: '1d100',
+    label: `${n}D 100`,
+    description: `!roll ${n}d100`,
+    value: `${n}d100`,
   },
   {
-    label: '1D 12',
-    description: '!roll 1d12',
-    value: '1d12',
+    label: `${n}D 12`,
+    description: `!roll ${n}d12`,
+    value: `${n}d12`,
   },
   {
-    label: '1D 10',
-    description: '!roll 1d10',
-    value: '1d10',
+    label: `${n}D 10`,
+    description: `!roll ${n}d10`,
+    value: `${n}d10`,
   },
   {
-    label: '1D 8',
-    description: '!roll 1d8',
-    value: '1d8',
+    label: `${n}D 8`,
+    description: `!roll ${n}d8`,
+    value: `${n}d8`,
   },
   {
-    label: '1D 6',
-    description: '!roll 1d6',
-    value: '1d6',
+    label: `${n}D 6`,
+    description: `!roll ${n}d6`,
+    value: `${n}d6`,
   },
   {
-    label: '1D 4',
-    description: '!roll 1d4',
-    value: '1d4',
+    label: `${n}D 4`,
+    description: `!roll ${n}d4`,
+    value: `${n}d4`,
   },
 ];
 
 module.exports = {
-  DEFAULT_DICE_DROPDOWN,
+  defaultDiceDropdown,
 };
