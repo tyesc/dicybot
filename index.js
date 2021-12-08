@@ -45,7 +45,8 @@ client.on('ready', async () => {
         const [n, dice] = val?.split('d').map(n => Number(n));
         const r = random({ n, max: dice });
 
-        await i.reply({
+        i.deferUpdate();
+        await i.channel.send({
           content: `${sender} Roll: \`${r.details}\` Result: ${r.total}`,
         });
       }
