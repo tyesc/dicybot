@@ -19,6 +19,7 @@ client.on('ready', async () => {
   const guildIds = client.guilds.cache.map(guild => guild.id);
 
   const commands = await initCmd({ clientId, guildIds });
+  const prefixes = commands.map(c => c?.prefixCommand.data.prefix);
 
   client.on('interactionCreate', async i => {
   	const channel = client.channels.cache.get(i.channelId);
@@ -51,7 +52,8 @@ client.on('ready', async () => {
   client.on('messageCreate', async m => {
     const content = m?.content?.split(' ');
 
-    if (content?.length) {
+    if (prefixes.includes(content[0])) {
+      console.log('passed');
       for (const command of commands) {
         const cmd = command.prefixCommand;
         const prefix = cmd.data.prefix;
