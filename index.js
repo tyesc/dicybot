@@ -28,8 +28,6 @@ client.on('ready', async () => {
       for (const command of commands) {
         const cmd = command.slashCommand;
 
-        console.log(i);
-
         if (i.commandName === cmd.data.name) {
           await cmd.exec(i);
         }
@@ -37,7 +35,6 @@ client.on('ready', async () => {
     }
 
     if (i.isSelectMenu()) {
-      console.log(i);
       const val = i?.values[0];
 
       if (val) {
