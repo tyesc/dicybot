@@ -16,11 +16,17 @@ module.exports = async ({ clientId, guildIds }) => {
 	for (const file of commandFiles) {
 		const { slashCommand, prefixCommand } = require(`./${file}`);
 
-		body.push(slashCommand.data.toJSON());
-		commands.push({
-			slashCommand,
-			prefixCommand,
-		});
+		if (slashCommand) {
+			body.push(slashCommand.data.toJSON());
+			commands.push({
+				slashCommand,
+				prefixCommand,
+			});
+		} else {
+			commands.push({
+				prefixCommand,
+			});
+		}
 	}
 
 	const rest = new REST({ version: '9' }).setToken(TOKEN);
