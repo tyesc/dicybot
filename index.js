@@ -29,7 +29,7 @@ client.on('ready', async () => {
       for (const command of commands) {
         const cmd = command.slashCommand;
 
-        if (i.commandName === cmd.data.name) {
+        if (cmd && i.commandName === cmd.data?.name) {
           await cmd.exec(i);
         }
       }
@@ -55,7 +55,7 @@ client.on('ready', async () => {
     if (prefixes.includes(content[0])) {
       for (const command of commands) {
         const cmd = command.prefixCommand;
-        const prefix = cmd.data.prefix;
+        const prefix = cmd.data?.prefix;
 
         if (content[0] === prefix) {
           await cmd.exec(m, client);
