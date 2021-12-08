@@ -9,7 +9,7 @@ const client = new Client({
   ],
 });
 
-const { token } = require('./config.json');
+const { TOKEN } = require('./src/services/env');
 const initCmd = require('./src/cmd');
 const random = require('./src/services/random');
 
@@ -53,7 +53,6 @@ client.on('ready', async () => {
     const content = m?.content?.split(' ');
 
     if (prefixes.includes(content[0])) {
-      console.log('passed');
       for (const command of commands) {
         const cmd = command.prefixCommand;
         const prefix = cmd.data.prefix;
@@ -68,4 +67,4 @@ client.on('ready', async () => {
 
 });
 
-client.login(token);
+client.login(TOKEN);
