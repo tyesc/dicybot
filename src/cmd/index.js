@@ -7,7 +7,7 @@ const colors = require('colors/safe');
 
 const { TOKEN } = require('../services/env');
 
-module.exports = async ({ clientId, guildIds }) => {
+module.exports = async ({ clientId, guilds }) => {
 	const body = [];
 	const commands = [];
 	const commandFiles = fs.readdirSync(resolve('./src/cmd'))
@@ -26,16 +26,17 @@ module.exports = async ({ clientId, guildIds }) => {
 	const rest = new REST({ version: '9' }).setToken(TOKEN);
 
 	try {
-		console.log(colors.yellow('Refreshing (/) commands ...'));
+		console.log(colors.yellow('Reload (/) commands...'));
 
-		for (const guildId of guildIds) {
+		for (const guild of guilds) {
 			await rest.put(
-				Routes.applicationGuildCommands(clientId, guildId),
+				Routes.applicationGuildCommands(clientId, guild.id),
 				{ body },
 			);
+			console.log(colors.cyan(`Gulid: ${guild.name} Done!`));
 		}
 
-		console.log(colors.green('Reloaded (/) commands Done!'));
+		console.log(colors.green('All guilds are reloaded!'));
 	} catch (error) {
 		console.error(error);
 	}

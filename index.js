@@ -16,9 +16,12 @@ const random = require('./src/services/random');
 client.on('ready', async () => {
   console.log(`Logged in as ${client.user.tag}!`);
   const clientId = client.user.id;
-  const guildIds = client.guilds.cache.map(guild => guild.id);
+  const guilds = client.guilds.cache.map(guild => ({
+      id: guild.id,
+      name: guild.name,
+    }));
 
-  const commands = await initCmd({ clientId, guildIds });
+  const commands = await initCmd({ clientId, guilds });
   const prefixes = commands.map(c => c?.prefixCommand.data.prefix);
 
   client.on('interactionCreate', async i => {
