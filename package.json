@@ -1,6 +1,6 @@
 {
   "name": "dicybot",
-  "version": "1.0.0",
+  "version": "1.0.0-beta.1",
   "description": "another bot to roll a dice",
   "main": "index.js",
   "repository": "git@github.com:tyesc/dicybot.git",

@@ -65,6 +65,19 @@ const successResponse = (sender, r) => [
   },
 ];
 
+const multiDiceEmbed = (sender, r) => {
+  const reduced = JSON.parse(r.details).reduce((obj, e) => {
+    obj[e] = (obj[e] || 0) + 1;
+    return obj;
+  }, {});
+
+  const occurence = Object.entries(reduced).map(e => (
+    `'${e[1]} Dé ${e[0]}'`
+  ));
+
+  return `${sender} Roll: \`[${occurence}]\` Result: ${r.total}`;
+};
+
 const getRespnse = ({ sender, r }) => {
   const n = r.total;
   let res = [];
@@ -87,6 +100,8 @@ const getRespnse = ({ sender, r }) => {
       res = normalResponse(sender, r);
       res = res[getRandom(1, (res.length - 1))];
     }
+  } else if (r.n > 10) {
+    res = multiDiceEmbed(sender, r);
   } else {
     res = normalResponse(sender, r);
     res = res[getRandom(1, (res.length - 1))];
