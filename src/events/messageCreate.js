@@ -1,5 +1,8 @@
 module.exports = (client, opts = {}) => {
   client.on('messageCreate', async m => {
+    if (m.author.bot) return;
+    if (!m.guild) return;
+
     const content = m?.content?.split(' ');
 
     if (opts?.prefixes.includes(content[0])) {
