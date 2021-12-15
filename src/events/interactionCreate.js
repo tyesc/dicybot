@@ -1,9 +1,11 @@
 const random = require('../services/random');
+const { getSender } = require('../services/helpers');
+const { getRespnse } = require('../services/commons');
 
 module.exports = (client, opts = {}) => {
   client.on('interactionCreate', async i => {
     const channel = client.channels.cache.get(i.channelId);
-    const sender = `**${i.user.username}**`;
+    const sender = getSender(i, client);
 
     if (i.isCommand()) {
       for (const command of opts?.commands) {
@@ -23,9 +25,7 @@ module.exports = (client, opts = {}) => {
         const r = random({ n, max: dice });
 
         i.deferUpdate();
-        await i.channel.send({
-          content: `${sender} Roll: \`${r.details}\` Result: ${r.total}`,
-        });
+        await i.channel.send(getRespnse({ sender, r }));
       }
     }
   });

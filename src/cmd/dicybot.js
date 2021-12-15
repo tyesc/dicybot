@@ -1,4 +1,4 @@
-const {MessageEmbed} = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 
 const diceDropdown = require('../components/diceDropdown');
 const random = require('../services/random');

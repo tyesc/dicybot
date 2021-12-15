@@ -1,5 +1,4 @@
-const getRandom = (min, max) =>
-  Math.floor(Math.random() * (Math.floor(max) - Math.ceil(min)) + min);
+const { getRandom } = require('./helpers');
 
 module.exports = ({ n = 0, min = 1, max }) => {
   let details = [];
@@ -14,6 +13,8 @@ module.exports = ({ n = 0, min = 1, max }) => {
 
   return {
     details: JSON.stringify(details.sort((a, b) => a - b)),
+    dice: max,
     total,
+    n,
   };
 };

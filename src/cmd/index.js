@@ -1,13 +1,13 @@
 const fs = require('fs');
-const {resolve} = require('path');
-const {Collection} = require('discord.js');
-const {REST} = require('@discordjs/rest');
-const {Routes} = require('discord-api-types/v9');
+const { resolve } = require('path');
+const { Collection } = require('discord.js');
+const { REST } = require('@discordjs/rest');
+const { Routes } = require('discord-api-types/v9');
 const colors = require('colors/safe');
 
-const {TOKEN} = require('../services/env');
+const { TOKEN } = require('../services/env');
 
-module.exports = async ({clientId, guilds}) => {
+module.exports = async ({ clientId, guilds }) => {
   const body = [];
   const commands = [];
   const commandFiles = fs.readdirSync(resolve('./src/cmd'))
@@ -17,10 +17,10 @@ module.exports = async ({clientId, guilds}) => {
     const {slashCommand, prefixCommand} = require(`./${file}`);
 
     slashCommand && body.push(slashCommand.data.toJSON());
-    commands.push({slashCommand, prefixCommand});
+    commands.push({ slashCommand, prefixCommand });
   }
 
-  const rest = new REST({version: '9'}).setToken(TOKEN);
+  const rest = new REST({ version: '9' }).setToken(TOKEN);
 
   try {
     console.log(colors.yellow('Reload (/) commands...'));

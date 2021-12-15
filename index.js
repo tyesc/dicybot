@@ -1,4 +1,5 @@
 const { Client, Intents } = require('discord.js');
+const colors = require('colors/safe');
 
 const client = new Client({
   intents: [
@@ -29,5 +30,7 @@ client.on('ready', async () => {
   });
 
 });
+client.on("warn", info => console.log(colors.yellow(info)));
+client.on("error", err => console.error(colors.red(err)));
 
 client.login(TOKEN);
