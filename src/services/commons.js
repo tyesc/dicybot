@@ -1,42 +1,49 @@
-const { getRandom } = require('./helpers');
+const { getRandom, minMaxNumber } = require('./helpers');
 
-const defaultDiceDropdown = n => [
-  {
-    label: `${n}D 100`,
-    description: `!roll ${n}d100`,
-    value: `${n}d100`,
-  },
-  {
-    label: `${n}D 12`,
-    description: `!roll ${n}d12`,
-    value: `${n}d12`,
-  },
-  {
-    label: `${n}D 10`,
-    description: `!roll ${n}d10`,
-    value: `${n}d10`,
-  },
-  {
-    label: `${n}D 8`,
-    description: `!roll ${n}d8`,
-    value: `${n}d8`,
-  },
-  {
-    label: `${n}D 6`,
-    description: `!roll ${n}d6`,
-    value: `${n}d6`,
-  },
-  {
-    label: `${n}D 4`,
-    description: `!roll ${n}d4`,
-    value: `${n}d4`,
-  },
-  {
-    label: `${n}D 2`,
-    description: `!roll ${n}d2`,
-    value: `${n}d2`,
-  },
-];
+const defaultDiceDropdown = n => {
+  const d = minMaxNumber(n, {
+    min: 0,
+    max: 100
+  })
+
+  return [
+    {
+      label: `${d}D 100`,
+      description: `!roll ${d}d100`,
+      value: `${d}d100`,
+    },
+    {
+      label: `${d}D 12`,
+      description: `!roll ${d}d12`,
+      value: `${d}d12`,
+    },
+    {
+      label: `${d}D 10`,
+      description: `!roll ${d}d10`,
+      value: `${d}d10`,
+    },
+    {
+      label: `${d}D 8`,
+      description: `!roll ${d}d8`,
+      value: `${d}d8`,
+    },
+    {
+      label: `${d}D 6`,
+      description: `!roll ${d}d6`,
+      value: `${d}d6`,
+    },
+    {
+      label: `${d}D 4`,
+      description: `!roll ${d}d4`,
+      value: `${d}d4`,
+    },
+    {
+      label: `${d}D 2`,
+      description: `!roll ${d}d2`,
+      value: `${d}d2`,
+    },
+  ];
+};
 
 const trashTalkResponse = (sender, r) => [
   {
@@ -82,29 +89,29 @@ const getRespnse = ({ sender, r }) => {
   const n = r.total;
   let res = [];
 
-  if (r.n === 1 && r.dice === 100) {
+  if (r.n <= 1 && r.dice === 100) {
     switch (true) {
       case n < 10:
       res = successResponse(sender, r);
-      res = res[getRandom(1, (res.length - 1))];
+      res = res[getRandom(0, (res.length - 1))];
       break;
       case n < 90 && n > 70:
       res = bofBofResponse(sender, r);
-      res = res[getRandom(1, (res.length - 1))];
+      res = res[getRandom(0, (res.length - 1))];
       break;
       case n > 90:
       res = trashTalkResponse(sender, r);
-      res = res[getRandom(1, (res.length - 1))];
+      res = res[getRandom(0, (res.length - 1))];
       break;
       default:
       res = normalResponse(sender, r);
-      res = res[getRandom(1, (res.length - 1))];
+      res = res[getRandom(0, (res.length - 1))];
     }
   } else if (r.n > 10) {
     res = multiDiceEmbed(sender, r);
   } else {
     res = normalResponse(sender, r);
-    res = res[getRandom(1, (res.length - 1))];
+    res = res[getRandom(0, (res.length - 1))];
   }
 
   return res;

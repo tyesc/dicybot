@@ -1,7 +1,7 @@
 const { Message, SelectMenuInteraction } = require('discord.js');
 
 const getRandom = (min, max) =>
-  Math.floor(Math.random() * (Math.floor(max) - Math.ceil(min)) + min);
+  Math.floor(Math.random() * (Math.floor(max) - Math.ceil(min) + 1) + min);
 
 const isInstanceOf = (e) => {
   const classes = [Message, SelectMenuInteraction];
