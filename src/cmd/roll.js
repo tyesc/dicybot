@@ -5,7 +5,7 @@ const random = require('../services/random');
 const { getSender, checkPrefix, minMaxNumber } = require('../services/helpers');
 const { getRespnse } = require('../services/commons');
 
-const prefix = '!roll';
+const prefix = 'roll';
 
 const slashCommand = {
   data: new SlashCommandBuilder()

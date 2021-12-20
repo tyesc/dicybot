@@ -91,15 +91,15 @@ const getRespnse = ({ sender, r }) => {
 
   if (r.n <= 1 && r.dice === 100) {
     switch (true) {
-      case n < 10:
+      case n < 5:
       res = successResponse(sender, r);
       res = res[getRandom(0, (res.length - 1))];
       break;
-      case n < 90 && n > 70:
+      case n < 95 && n > 70:
       res = bofBofResponse(sender, r);
       res = res[getRandom(0, (res.length - 1))];
       break;
-      case n > 90:
+      case n > 95:
       res = trashTalkResponse(sender, r);
       res = res[getRandom(0, (res.length - 1))];
       break;
