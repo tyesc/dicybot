@@ -91,7 +91,7 @@ const getRespnse = ({ sender, r }) => {
 
   if (r.n <= 1 && r.dice === 100) {
     switch (true) {
-      case n < 5:
+      case n <= 5:
       res = successResponse(sender, r);
       res = res[getRandom(0, (res.length - 1))];
       break;
