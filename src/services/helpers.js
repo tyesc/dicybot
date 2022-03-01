@@ -42,12 +42,19 @@ const checkPrefix = (m, prefix) => {
   if (_prefix === prefix) {
     const [d, n] = opts?.split('d');
     const [_d, _operator, _cnum] = d?.split(/([-+*])/g);
-    const [_n, operator, cnum] = n?.split(/([-+*])/g);
+
+    if (n) {
+      const [_n, operator, cnum] = n?.split(/([-+*])/g);
+
+      return {
+        roll: `${_d}d${_n}`,
+        cnum: Number(cnum),
+        operator,
+      };
+    }
 
     return {
-      roll: `${_d}d${_n}`,
-      cnum: Number(cnum),
-      operator,
+      roll: opts,
     };
   }
 
