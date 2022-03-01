@@ -6,6 +6,10 @@
   "repository": "git@github.com:tyesc/dicybot.git",
   "author": "tyesc <escolano.tyler@gmail.com>",
   "license": "LicenseRef-LICENSE",
+  "engines": {
+    "node": "16",
+    "yarn": "1"
+  },
   "dependencies": {
     "@discordjs/rest": "^0.1.0-canary.0",
     "colors": "^1.4.0",
