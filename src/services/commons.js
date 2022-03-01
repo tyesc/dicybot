@@ -52,11 +52,11 @@ const trashTalkResponse = (sender, r) => [
   },
   {
     content: `Prie ton MJ, puisse-t-il être clément... \n` +
-      `vla ton score, Roll: \`${r.details}\` Result: ${r.total}`,
+      `${sender} Roll: \`${r.details}\` Result: ${r.total}`,
   },
   {
     content: `...Prépare ton testament. \n` +
-      `vla ton score, Roll: \`${r.details}\` Result: ${r.total}`,
+      `${sender} Roll: \`${r.details}\` Result: ${r.total}`,
   },
 ];
 
@@ -95,7 +95,7 @@ const successResponse = (sender, r) => [
       `${sender} Roll: \`${r.details}\` Result: ${r.total}`,
   },
   {
-    content: 'Oui, c\'est bien un succès critique. \n' +
+    content: 'Oui, c\'est bien un réussite critique. \n' +
       `${sender} Roll: \`${r.details}\` Result: ${r.total}`,
   },
 ];

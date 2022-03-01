@@ -22,10 +22,10 @@ module.exports = (client, opts = {}) => {
 
       if (val) {
         const [n, dice] = val?.split('d').map(n => Number(n));
-        const r = random({ n, max: dice });
+        const randomed = random({ n, max: dice });
 
         i.deferUpdate();
-        await i.channel.send(getRespnse({ sender, r }));
+        await i.channel.send(getRespnse({ sender, randomed }));
       }
     }
   });
