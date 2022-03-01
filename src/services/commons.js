@@ -50,11 +50,23 @@ const trashTalkResponse = (sender, r) => [
     content: `Bououou ${sender}, t'es nul :laughing: \n` +
       `vla ton score, Roll: \`${r.details}\` Result: ${r.total}`,
   },
+  {
+    content: `Prie ton MJ, puisse-t-il être clément... \n` +
+      `vla ton score, Roll: \`${r.details}\` Result: ${r.total}`,
+  },
+  {
+    content: `...Prépare ton testament. \n` +
+      `vla ton score, Roll: \`${r.details}\` Result: ${r.total}`,
+  },
 ];
 
 const bofBofResponse = (sender, r) => [
   {
     content: 'Mwè c\'est pas fameux tout ça \n' +
+      `${sender} Roll: \`${r.details}\` Result: ${r.total}`,
+  },
+  {
+    content: 'Alors, ça passe ou pas ? \n' +
       `${sender} Roll: \`${r.details}\` Result: ${r.total}`,
   },
 ];
@@ -63,11 +75,27 @@ const normalResponse = (sender, r) => [
   {
     content: `${sender} Roll: \`${r.details}\` Result: ${r.total}`,
   },
+  {
+    content: 'Tranquille. \n' +
+      `${sender} Roll: \`${r.details}\` Result: ${r.total}`,
+  },
+  {
+    content: 'Tout va bien, faut pas stresser comme ça ! \n' +
+      `${sender} Roll: \`${r.details}\` Result: ${r.total}`,
+  },
 ];
 
 const successResponse = (sender, r) => [
   {
     content: 'HA le MJ l\'a dans l\'c.. l\'os \n ' +
+      `${sender} Roll: \`${r.details}\` Result: ${r.total}`,
+  },
+  {
+    content: 'Gloire au tout puissant toi ! \n' +
+      `${sender} Roll: \`${r.details}\` Result: ${r.total}`,
+  },
+  {
+    content: 'Oui, c\'est bien un succès critique. \n' +
       `${sender} Roll: \`${r.details}\` Result: ${r.total}`,
   },
 ];
@@ -92,20 +120,20 @@ const getRespnse = ({ sender, r }) => {
   if (r.n <= 1 && r.dice === 100) {
     switch (true) {
       case n <= 5:
-      res = successResponse(sender, r);
-      res = res[getRandom(0, (res.length - 1))];
+        res = successResponse(sender, r);
+        res = res[getRandom(0, (res.length - 1))];
       break;
       case n < 95 && n > 70:
-      res = bofBofResponse(sender, r);
-      res = res[getRandom(0, (res.length - 1))];
+        res = bofBofResponse(sender, r);
+        res = res[getRandom(0, (res.length - 1))];
       break;
       case n > 95:
-      res = trashTalkResponse(sender, r);
-      res = res[getRandom(0, (res.length - 1))];
+        res = trashTalkResponse(sender, r);
+        res = res[getRandom(0, (res.length - 1))];
       break;
       default:
-      res = normalResponse(sender, r);
-      res = res[getRandom(0, (res.length - 1))];
+        res = normalResponse(sender, r);
+        res = res[getRandom(0, (res.length - 1))];
     }
   } else if (r.n > 10) {
     res = multiDiceEmbed(sender, r);
