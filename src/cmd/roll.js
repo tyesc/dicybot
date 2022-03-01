@@ -2,7 +2,7 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 
 const diceDropdown = require('../components/diceDropdown');
 const random = require('../services/random');
-const { getSender, checkPrefix, minMaxNumber, evil } = require('../services/helpers');
+const { getSender, checkPrefix, minMaxNumber, calculate } = require('../services/helpers');
 const { getRespnse } = require('../services/commons');
 
 const prefix = 'roll';
@@ -62,7 +62,7 @@ const prefixCommand = {
 
     Object.assign(randomed, {
       total: opts?.operator
-        ? evil(randomed.total + opts?.operator + opts?.cnum)
+        ? calculate(randomed.total + opts?.operator + opts?.cnum)
         : randomed.total,
     });
 

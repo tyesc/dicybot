@@ -41,8 +41,8 @@ const checkPrefix = (m, prefix) => {
 
   if (_prefix === prefix) {
     const [d, n] = opts?.split('d');
-    const [_d, _operator, _cnum] = d?.split(/([-+*/])/g);
-    const [_n, operator, cnum] = n?.split(/([-+*/])/g);
+    const [_d, _operator, _cnum] = d?.split(/([-+*])/g);
+    const [_n, operator, cnum] = n?.split(/([-+*])/g);
 
     return {
       roll: `${_d}d${_n}`,
@@ -66,8 +66,20 @@ const minMaxNumber = (n, { min, max }) => {
   return res;
 };
 
-const evil = fn => {
-  return new Function('return ' + fn)();
+const calculate = (a, b, operator) => {
+  switch (operator) {
+    case "+":
+      return a + b;
+      break;
+    case "-":
+      return a - b;
+      break;
+    case "*":
+      return a * b;
+      break;
+    default:
+    return a;
+  }
 }
 
 module.exports = {
@@ -75,5 +87,5 @@ module.exports = {
   getSender,
   checkPrefix,
   minMaxNumber,
-  evil,
+  calculate,
 };
