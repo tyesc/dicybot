@@ -2,7 +2,7 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 
 const diceDropdown = require('../components/diceDropdown');
 const random = require('../services/random');
-const { getSender, checkPrefix, minMaxNumber } = require('../services/helpers');
+const { getSender, checkPrefix, minMaxNumber, evil } = require('../services/helpers');
 const { getRespnse } = require('../services/commons');
 
 const prefix = 'roll';
@@ -38,18 +38,18 @@ const prefixCommand = {
     let opts = checkPrefix(m, prefix);
 
     if (!opts) {
-      opts = '1d100';
+      opts = { roll: '1d100' };
     }
 
-    let [n, dice] = opts
-      ?.split('d').map(n => Number(n));
+    let [n, dice] = opts.
+      roll?.split('d').map(n => Number(n));
 
     if (!Number.isInteger(n) || !Number.isInteger(dice)) {
       n = 1;
       dice = 100;
     }
 
-    const r = random({
+    const randomed = random({
       n: minMaxNumber(n, {
         min: 0,
         max: 100
@@ -60,7 +60,13 @@ const prefixCommand = {
       })
     });
 
-    await channel.send(getRespnse({ sender, r }));
+    Object.assign(randomed, {
+      total: opts?.operator
+        ? evil(randomed.total + opts?.operator + opts?.cnum)
+        : randomed.total,
+    });
+
+    await channel.send(getRespnse({ sender, randomed }));
   }
 };
 

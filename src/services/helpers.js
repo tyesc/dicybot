@@ -40,7 +40,15 @@ const checkPrefix = (m, prefix) => {
   const [_prefix, opts] = m?.content?.split(' ');
 
   if (_prefix === prefix) {
-    return opts;
+    const [d, n] = opts?.split('d');
+    const [_d, _operator, _cnum] = d?.split(/([-+*/])/g);
+    const [_n, operator, cnum] = n?.split(/([-+*/])/g);
+
+    return {
+      roll: `${_d}d${_n}`,
+      operator,
+      cnum
+    };
   }
 
   return false;
@@ -58,9 +66,14 @@ const minMaxNumber = (n, { min, max }) => {
   return res;
 };
 
+const evil = fn => {
+  return new Function('return ' + fn)();
+}
+
 module.exports = {
   getRandom,
   getSender,
   checkPrefix,
   minMaxNumber,
+  evil,
 };

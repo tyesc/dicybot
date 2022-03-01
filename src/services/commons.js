@@ -113,7 +113,7 @@ const multiDiceEmbed = (sender, r) => {
   return `${sender} Roll: \`[${occurence}]\` Result: ${r.total}`;
 };
 
-const getRespnse = ({ sender, r }) => {
+const getRespnse = ({ sender, randomed: r }) => {
   const n = r.total;
   let res = [];
 
@@ -138,8 +138,7 @@ const getRespnse = ({ sender, r }) => {
   } else if (r.n > 10) {
     res = multiDiceEmbed(sender, r);
   } else {
-    res = normalResponse(sender, r);
-    res = res[getRandom(0, (res.length - 1))];
+    res = normalResponse(sender, r)[0];
   }
 
   return res;
