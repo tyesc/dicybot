@@ -62,7 +62,7 @@ const prefixCommand = {
 
     Object.assign(randomed, {
       total: opts?.operator
-        ? calculate(randomed.total + opts?.operator + opts?.cnum)
+        ? calculate(randomed.total, opts?.cnum, opts?.operator)
         : randomed.total,
     });
 

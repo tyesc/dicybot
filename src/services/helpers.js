@@ -46,8 +46,8 @@ const checkPrefix = (m, prefix) => {
 
     return {
       roll: `${_d}d${_n}`,
+      cnum: Number(cnum),
       operator,
-      cnum
     };
   }
 
