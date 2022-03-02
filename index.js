@@ -7,6 +7,7 @@ const client = new Client({
     Intents.FLAGS.GUILD_INTEGRATIONS,
     Intents.FLAGS.GUILD_MESSAGES,
     Intents.FLAGS.DIRECT_MESSAGES,
+    Intents.FLAGS.GUILD_VOICE_STATES,
   ],
 });
 
@@ -30,7 +31,7 @@ client.on('ready', async () => {
   });
 
 });
-client.on("warn", info => console.log(colors.yellow(info)));
-client.on("error", err => console.error(colors.red(err)));
+client.on('warn', info => console.log(colors.yellow(info)));
+client.on('error', err => console.error(colors.red(err)));
 
 client.login(TOKEN);
