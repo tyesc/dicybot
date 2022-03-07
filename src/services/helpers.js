@@ -39,7 +39,7 @@ const getSender = (e, client) => {
 const checkPrefix = (m, prefix) => {
   const [_prefix, opts] = m?.content?.split(' ');
 
-  if (_prefix === prefix) {
+  if (_prefix === prefix && opts) {
     const [d, n] = opts?.split('d');
     const [_d, _operator, _cnum] = d?.split(/([-+*])/g);
 
